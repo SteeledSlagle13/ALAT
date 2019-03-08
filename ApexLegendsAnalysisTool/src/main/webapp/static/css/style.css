@@ -1,0 +1,220 @@
+body {
+	background-image: url('../images/logoBG.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: #191919;
+	background-attachment: fixed;
+	font-family: 'Teko';
+	z-index: -100; 
+}
+.title {
+	text-align: center;
+}
+.title h1 {
+	color: white;
+    text-decoration: underline;
+    font-size: 46px;
+}
+
+.nav-dark {
+	background-color: #000000;
+	position: sticky;
+	border: 2px solid red;
+	border-radius: 5px;
+}
+.nav-dark .active {
+	background-color: red;
+	color: black;
+}
+.nav-dark ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+.nav-dark li {
+	float: right;
+}
+.nav-dark li a, .dropbtn {
+	color: red;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	padding: 14px 16px;
+}
+.nav-dark li a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+  color: white;
+}
+.nav-dark li.dropdown {
+	display: inline-block;
+}
+.nav-dark .dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #F9F9F9;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+}
+.nav-dark .dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+	text-align: left;
+}
+.nav-dark .dropdown-content a:hover {
+	background-color: #F1F1F1;
+	color: black;
+}
+.nav-dark .dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.container {
+	width: 100%;
+  	height: 549px;
+}
+.container.light {
+	background-color: #E6E2D9;
+}
+.container.footer {
+	background-image: url("../images/footer.jpg");
+	height: 200px;
+  	bottom: 0;
+  	left: 0;
+}
+
+.info {
+	text-align: right;
+	padding: 100px 0;
+}
+
+.loginform {
+	position: absolute;
+	border: 2px solid red;
+	border-radius: 5px;
+	background-color: black;
+	color: white;
+	font-style: bold;
+	right: 10%;
+	top: 35%
+}
+.loginform .input-dark {
+	border: 2px solid grey;
+	border-radius: 5px;
+	background-color: #616161;
+	color: white;
+    float: right;
+}
+.input-dark:focus {
+	border: 2px solid red;
+}
+.input-dark::placeholder {
+	color:white;
+}
+
+.darkbtn {
+	color: red;
+	background-color: black;
+	border: 2px solid red;
+	border-radius: 5px;
+}
+.darkbtn:active {
+	color: #CF0000;
+	background-color: black;
+	border-radius: 5px;
+	border: 2px solid #CF0000;
+}
+.darkbtn:hover {
+	color:white;
+}
+
+.selectcompare {
+	border: 2px solid grey;
+	border-radius: 5px;
+	background-color: #616161;
+	color: white;
+    float: right;
+    width: 100%;
+}
+.selectcompare:focus {
+	border: 2px solid red;
+	outline: none;
+}
+
+.centersection {
+	width: 75%;
+	margin: auto;
+  	text-align: center;
+}
+
+.selector {
+	margin-left: 25%;
+	width: 50%;
+	border: 2px solid red;
+	border-radius: 5px;
+	background-color: black;
+}
+
+.lefttable {
+    margin-left: 5%;
+}
+
+.darkdrpdown {
+	border: 2px solid grey;
+	border-radius: 2px;
+	background-color: #616161;
+	color: white;
+}
+
+.centertitle {
+    margin-top: 10%;
+}
+
+.weapondisplaytbl {
+    width: 100%;
+    text-align: center;
+}
+
+.footertable {
+    table-layout: fixed;
+    display: table;
+    width: 50%;
+    margin-left: 25%;
+}
+
+.signupformcontainer {
+    margin: 20px;
+    margin-bottom: 60px;
+}
+
+.loginformcontainer {
+    margin: 20px;
+    margin-bottom: 40px;
+}
+.formtitle {
+    font-size: 24px;
+}
+
+.white {
+    color: white;
+}
+.black {
+    color: black;
+}
+.red {
+    color: red;
+}
+
+.left {
+    text-align: left;
+}
+
+input:focus {
+	outline: none;
+}
+
+a:visited {
+	color: blue;
+}

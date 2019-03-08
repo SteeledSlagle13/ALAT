@@ -1,0 +1,144 @@
+{
+    "weapons": [
+        {
+            "name": "havoc rifle",
+            "low": 202,
+            "high": 404,
+            "type": "assault rifle",
+            "image": "resources/images/ar/havoc.png"
+        },
+        {
+            "name": "hemlok burst ar",
+            "low": 279,
+            "high": 558,
+            "type": "assault rifle",
+            "image": "resources/images/ar/hemlok.png"
+        },
+        {
+            "name": "r-301 carbine",
+            "low": 189,
+            "high": 378,
+            "type": "assault rifle",
+            "image": "resources/images/ar/r301.png"
+        },
+        {
+            "name": "vk-47 flatline",
+            "low": 160,
+            "high": 320,
+            "type": "assault rifle",
+            "image": "resources/images/ar/flatline.png"
+        },
+        {
+            "name": "Devotion LMG",
+            "low": 85,
+            "high": 170,
+            "type": "light machine gun",
+            "image": "resources/images/lmg/devotion.png"
+        },
+        {
+            "name": "m600 spitfire",
+            "low": 180,
+            "high": 360,
+            "type": "light machine gun",
+            "image": "resources/images/lmg/spitfire.png"
+        },
+        {
+            "name": "re-45",
+            "low": 143,
+            "high": 215,
+            "type": "pistol",
+            "image": "resources/images/pistol/re45.png"
+        },
+        {
+            "name": "p2020",
+            "low": 102,
+            "high": 153,
+            "type": "pistol",
+            "image": "resources/images/pistol/p2020.png"
+        },
+        {
+            "name": "wingman",
+            "low": 140,
+            "high": 280,
+            "type": "pistol",
+            "image": "resources/images/pistol/wingman.png"
+        },
+        {
+            "name": "mozambique shotgun",
+            "low": 99,
+            "high": 149,
+            "type": "shotgun",
+            "image": "resources/images/shotgun/mozambique.png"
+        },
+        {
+            "name": "peacekeeper",
+            "low": 440,
+            "high": 660,
+            "type": "shotgun",
+            "image": "resources/images/shotgun/peacekeeper.png"
+        },
+        {
+            "name": "mastiff shotgun",
+            "low": 187,
+            "high": 374,
+            "type": "shotgun",
+            "image": "resources/images/shotgun/mastiff.png"
+        },
+        {
+            "name": "eva-8 shotgun",
+            "low": 126,
+            "high": 189,
+            "type": "shotgun",
+            "image": "resources/images/shotgun/eva8.png"
+        },
+        {
+            "name": "alternator smg",
+            "low": 130,
+            "high": 195,
+            "type": "sub machine gun",
+            "image": "resources/images/smg/alternator.png"
+        },
+        {
+            "name": "prowler burst pdw",
+            "low": 294,
+            "high": 441,
+            "type": "sub machine gun",
+            "image": "resources/images/smg/prowler.png"
+        },
+        {
+            "name": "r-99 smg",
+            "low": 216,
+            "high": 324,
+            "type": "sub machine gun",
+            "image": "resources/images/smg/r99.png"
+        },
+        {
+            "name": "longbow dmr",
+            "low": 66,
+            "high": 132,
+            "type": "sniper",
+            "image": "resources/images/sniper/longbow.png"
+        },
+        {
+            "name": "g7 scout",
+            "low": 135,
+            "high": 270,
+            "type": "sniper",
+            "image": "resources/images/sniper/g7scout.png"
+        },
+        {
+            "name": "triple take",
+            "low": 86,
+            "high": 172,
+            "type": "sniper",
+            "image": "resources/images/sniper/tripletake.png"
+        },
+        {
+            "name": "kraber .50-cal sniper",
+            "low": 150,
+            "high": 300,
+            "type": "sniper",
+            "image": "resources/images/sniper/kraber.png"
+        }
+    ]
+}
