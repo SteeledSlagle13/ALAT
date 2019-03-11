@@ -19,40 +19,49 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.apexlegendsat.springmvc.entity.UserEntity;
 import com.apexlegendsat.springmvc.service.UserService;
+import com.apexlegendsat.springmvc.view.UserView;
 
 @RestController
 public class ALATUserRestController {
-	
+
 	static Logger logger = LogManager.getLogger(ALATUserRestController.class.getName());
 
 	@Autowired
 	private UserService userService;
+	
+	private UserView viewableUser = new UserView();
 
 	@RequestMapping(value = "/user/", method = RequestMethod.GET)
 	public ResponseEntity<List<UserEntity>> listAllUsers() {
+		logger.info(userService);
 		List<UserEntity> users = userService.findAllUsers();
+		logger.info("should have users.");
 		if (users.isEmpty()) {
 			return new ResponseEntity<List<UserEntity>>(HttpStatus.NO_CONTENT);
 		}
+		
 		return new ResponseEntity<List<UserEntity>>(users, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> getUser(@PathVariable("id") long id) {
+
 		logger.info("Fetching user with id : " + id);
 		UserEntity user = userService.findById(id);
+
 		if (user == null) {
-			logger.error("user with id : "+ id + " not found");
+			logger.error("user with id : " + id + " not found");
 			return new ResponseEntity<UserEntity>(HttpStatus.NO_CONTENT);
 		}
+
 		return new ResponseEntity<UserEntity>(user, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/user/", method = RequestMethod.POST)
 	public ResponseEntity<Void> createUser(@RequestBody UserEntity user, UriComponentsBuilder ucBuilder) {
 		logger.info("creating user " + user.getUsername());
-		
-		if (userService.isUserExist(user)) {
+
+		if (userService.doesUserExist(user)) {
 			logger.error("A User with name " + user.getUsername() + " already exist");
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 		}
@@ -99,9 +108,10 @@ public class ALATUserRestController {
 
 	@RequestMapping(value = "/user/", method = RequestMethod.DELETE)
 	public ResponseEntity<UserEntity> deleteAllUsers() {
+		
 		logger.info("Deleting All Users");
 
-		userService.deleteAllUsers();
+		userService.purgeUsers();
 		return new ResponseEntity<UserEntity>(HttpStatus.NO_CONTENT);
 	}
 }

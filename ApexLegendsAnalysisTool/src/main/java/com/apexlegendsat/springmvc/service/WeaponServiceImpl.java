@@ -1,9 +1,6 @@
 package com.apexlegendsat.springmvc.service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +17,21 @@ public class WeaponServiceImpl implements WeaponService {
 	private WeaponDAO weaponDao;
 	
 	@Override
+	public void deleteWeaponById(long id) {
+		weaponDao.deleteWeaponEntityById(id);
+	}
+	
+	@Override
+	public boolean doesWeaponExist(WeaponEntity weapon) {
+		return findByName(weapon.getName()) != null;
+	}
+	
+	@Override
+	public List<WeaponEntity> findAllWeapons() {
+		return weaponDao.findAllWeaponEntities();
+	}
+	
+	@Override
 	public WeaponEntity findById(long id) {
 		return weaponDao.findWeaponEntityById(id);
 	}
@@ -30,6 +42,11 @@ public class WeaponServiceImpl implements WeaponService {
 	}
 
 	@Override
+	public void purgeWeapons() {
+		weaponDao.purgeWeaponEntities();
+	}
+	
+	@Override
 	public void saveWeapon(WeaponEntity weapon) {
 		weaponDao.saveWeaponEntity(weapon);
 	}
@@ -39,25 +56,7 @@ public class WeaponServiceImpl implements WeaponService {
 		weaponDao.updateWeaponEntity(weapon);
 	}
 
-	@Override
-	public void deleteWeaponById(long id) {
-		weaponDao.deleteWeaponEntityById(id);
-	}
-
-	@Override
-	public List<WeaponEntity> findAllWeapons() {
-		return weaponDao.findAllWeaponEntities();
-	}
-
-	@Override
-	public void purgeWeapons() {
-		weaponDao.purgeWeaponEntities();
-	}
-
-	@Override
-	public boolean doesWeaponExist(WeaponEntity weapon) {
-		return findByName(weapon.getName()) != null;
-	}
+	
 	
 //	private static final AtomicLong counter = new AtomicLong();
 //	

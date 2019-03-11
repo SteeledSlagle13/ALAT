@@ -4,18 +4,25 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
-
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.springframework.stereotype.Repository;
 
+import com.apexlegendsat.springmvc.controller.ALATUserRestController;
 import com.apexlegendsat.springmvc.entity.WeaponEntity;
 
-@Repository("weaponDAO")
+@Repository("weaponDao")
 public class WeaponDaoImpl extends AbstractDAO implements WeaponDAO {
 
+	static Logger logger = LogManager.getLogger(WeaponDaoImpl.class.getName());
+	
 	@Override
 	public void deleteWeaponEntityById(long weaponId) {
-		Query deleteQuery = getSession().createSQLQuery("delete from weapon where id =: weaponId");
+		
+		logger.info("Attempting Weapon Delete.");
+		
+		Query deleteQuery = getSession().createQuery("delete from WeaponEntity where id =:weaponId");
 		deleteQuery.setLong("weaponId", weaponId);
 
 		deleteQuery.executeUpdate();
@@ -37,7 +44,7 @@ public class WeaponDaoImpl extends AbstractDAO implements WeaponDAO {
 
 	@Override
 	public WeaponEntity findWeaponEntityByName(String weaponName) {
-		Query findQuery = getSession().createSQLQuery("from weapon where name =: weaponName");
+		Query findQuery = getSession().createQuery("from WeaponEntity where name =:weaponName");
 		findQuery.setString("weaponName", weaponName);
 
 		return (WeaponEntity) findQuery.uniqueResult();
@@ -45,13 +52,13 @@ public class WeaponDaoImpl extends AbstractDAO implements WeaponDAO {
 
 	@Override
 	public void purgeWeaponEntities() {
-		Query purgeQuery = getSession().createSQLQuery("delete from weapon");
+		Query purgeQuery = getSession().createSQLQuery("delete from WeaponEntity");
 		purgeQuery.executeUpdate();
 	}
 
 	@Override
 	public void saveWeaponEntity(WeaponEntity weaponEntity) {
-		persist(weaponEntity);
+		getSession().persist(weaponEntity);
 	}
 
 	@Override
