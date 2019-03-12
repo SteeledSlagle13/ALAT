@@ -21,7 +21,7 @@ import com.apexlegendsat.springmvc.service.WeaponService;
 @RestController
 public class ALATWeaponRestController {
 	
-	static Logger logger = LogManager.getLogger(ALATUserRestController.class.getName());
+	static Logger logger = LogManager.getLogger(ALATWeaponRestController.class.getName());
 
 	@Autowired
 	private WeaponService weaponService;
@@ -68,7 +68,7 @@ public class ALATWeaponRestController {
 
 		if (currentWeapon == null) {
 			logger.error("Weapon with id " + id + " not found");
-			return new ResponseEntity<WeaponEntity>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<WeaponEntity>(HttpStatus.NO_CONTENT);
 		}
 
 		currentWeapon.setName(weapon.getName());
@@ -88,7 +88,7 @@ public class ALATWeaponRestController {
 		WeaponEntity wepaon = weaponService.findById(id);
 		if (wepaon == null) {
 			logger.error("Unable to delete. Weapon with id " + id + " not found");
-			return new ResponseEntity<WeaponEntity>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<WeaponEntity>(HttpStatus.NO_CONTENT);
 		}
 
 		weaponService.deleteWeaponById(id);

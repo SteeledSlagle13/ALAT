@@ -3,6 +3,9 @@
 <jsp:include page="includes/header.jsp"></jsp:include>
 <body ng-app="weaponManagerApp" ng-controller="WeaponController as ctrl">
 	<div>
+		<div>
+			<a href="/ApexLegendsAnalysisTool/signout">Sign out!</a>
+		</div>
 		<form class="loginform" style="position: fixed;"
 			ng-submit="ctrl.submit()" name="weaponForm">
 			<input type="hidden" ng-model="ctrl.weapon.id" />
@@ -11,11 +14,12 @@
 				<table>
 					<tr>
 						<td><input class="input-dark" type="text"
-							ng-model="ctrl.weapon.name" name="name"
-							placeholder="Weapon Name" required ng-minlength="3" /></td>
+							ng-model="ctrl.weapon.name" name="name" placeholder="Weapon Name"
+							required ng-minlength="3" /></td>
 					</tr>
 					<tr>
-						<td><select class="selectcompare" name="type" ng-model="ctrl.weapon.type">
+						<td><select class="selectcompare" name="type"
+							ng-model="ctrl.weapon.type">
 								<option value="" selected disabled hidden>Weapon Type</option>
 								<option value="assault rifle">Assault Rifle</option>
 								<option value="light machine gun">Light Machine Gun</option>
@@ -27,17 +31,17 @@
 					</tr>
 					<tr>
 						<td><input class="input-dark" type="number"
-							ng-model="ctrl.weapon.lowDPS" name="low"
-							placeholder="Low DPS" required /></td>
+							ng-model="ctrl.weapon.lowDPS" name="low" placeholder="Low DPS"
+							required /></td>
 					</tr>
 					<tr>
 						<td><input class="input-dark" type="number"
-							ng-model="ctrl.weapon.highDPS" name="high"
-							placeholder="High DPS" required /></td>
+							ng-model="ctrl.weapon.highDPS" name="high" placeholder="High DPS"
+							required /></td>
 					</tr>
 					<tr>
-					<td><input class="darkbtn" type="submit"
-						value="{{!ctrl.weapon.id ? 'Add' : 'Update'}}" /></td>
+						<td><input class="darkbtn" type="submit"
+							value="{{!ctrl.weapon.id ? 'Add' : 'Update'}}" /></td>
 					</tr>
 				</table>
 			</div>
@@ -72,8 +76,7 @@
 			</tbody>
 		</table>
 	</div>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+	<jsp:include page="includes/footer.jsp"></jsp:include>
 	<script
 		src="/ApexLegendsAnalysisTool/static/js/weaponmanager/weaponmanager.app.js"></script>
 	<script

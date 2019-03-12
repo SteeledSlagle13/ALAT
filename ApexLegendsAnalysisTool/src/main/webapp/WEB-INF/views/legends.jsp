@@ -15,5 +15,6 @@
 			<li><a href="/ApexLegendsAnalysisTool/">Home</a></li>
 		</ul>
 	</nav>
+	<jsp:include page="includes/footer.jsp"></jsp:include>
 </body>
 </html>

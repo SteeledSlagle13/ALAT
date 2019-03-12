@@ -13,6 +13,8 @@ angular.module('weaponManagerApp').controller('WeaponController', ['$scope', 'We
     };
     
     self.weapons=[];
+    $scope.weapon1={};
+    $scope.weapon2={};
 
     $scope.weapons = [];
 
@@ -30,6 +32,8 @@ angular.module('weaponManagerApp').controller('WeaponController', ['$scope', 'We
             function(d) {
                 self.weapons = d.data;
                 $scope.weapons=self.weapons;
+                $scope.weapon1 = self.weapons[0];
+                $scope.weapon2 = self.weapons[0];
             },
             function(errResponse){
                 console.error('Error fetching weapons');

@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
 import org.hibernate.Criteria;
+
 import org.springframework.stereotype.Repository;
 
-import com.apexlegendsat.springmvc.controller.ALATUserRestController;
 import com.apexlegendsat.springmvc.entity.WeaponEntity;
 
 @Repository("weaponDao")
@@ -52,7 +54,7 @@ public class WeaponDaoImpl extends AbstractDAO implements WeaponDAO {
 
 	@Override
 	public void purgeWeaponEntities() {
-		Query purgeQuery = getSession().createSQLQuery("delete from WeaponEntity");
+		Query purgeQuery = getSession().createQuery("delete from WeaponEntity");
 		purgeQuery.executeUpdate();
 	}
 

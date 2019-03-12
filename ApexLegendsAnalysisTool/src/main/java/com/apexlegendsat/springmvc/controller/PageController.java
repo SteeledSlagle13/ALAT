@@ -4,12 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.apexlegendsat.springmvc.entity.UserEntity;
+import com.apexlegendsat.springmvc.view.UserView;
 
 @Controller
 public class PageController {
@@ -33,7 +34,7 @@ public class PageController {
 		logger.info("getting login page");
 		
 		ModelAndView modelView;
-		UserEntity sessionUser = (UserEntity) request.getSession().getAttribute("user");
+		UserView sessionUser = (UserView) request.getSession().getAttribute("user");
 		
 		if(sessionUser == null) {
 			logger.error("User is not logged in.");
@@ -41,6 +42,26 @@ public class PageController {
 		} else {
 			logger.info("User is logged in.");
 			modelView = new ModelAndView("weaponManager", "user", sessionUser);
+		}
+		
+		return modelView;
+	}
+	
+	@RequestMapping(value = { "/signout" }, method = RequestMethod.GET)
+	public ModelAndView userSignout(HttpServletRequest request) {
+		
+		ModelAndView modelView;
+		
+		logger.info("Checking if user was logged in.");
+		UserView sessionUser = (UserView) request.getSession().getAttribute("user");
+		
+		if(sessionUser == null) {
+			logger.info("no user has been logged in.");
+			modelView = new ModelAndView("login");
+		} else {
+			logger.info("a user was logged in deleting session attribute");
+			request.getSession().setAttribute("user", null);
+			modelView = new ModelAndView("redirect:/");
 		}
 		
 		return modelView;
@@ -55,7 +76,7 @@ public class PageController {
 	@RequestMapping(value = { "/weaponmanager" }, method = RequestMethod.GET)
 	public ModelAndView getWeaponManagerPage(HttpServletRequest request) {
 		
-		UserEntity sessionUser = (UserEntity) request.getSession().getAttribute("user");
+		UserView sessionUser = (UserView) request.getSession().getAttribute("user");
 		
 		ModelAndView modelView;
 		
@@ -64,6 +85,7 @@ public class PageController {
 			modelView = new ModelAndView("login", "Error", "LOGIN_ACCESS_ONLY");
 		} else {
 			logger.info("getting weapon manager page");
+			logger.info(sessionUser);
 			modelView = new ModelAndView("weaponManager", "user", sessionUser);
 		}
 		

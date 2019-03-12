@@ -2,6 +2,7 @@ package com.apexlegendsat.springmvc.view;
 
 public class WeaponView {
 
+	private int id;
 	private String name;
 	private String imageString;
 	private int lowDPS;
@@ -11,12 +12,21 @@ public class WeaponView {
 
 	}
 
-	public WeaponView(String name, String imageString, int lowDPS, int highDPS) {
+	public WeaponView(int id, String name, String imageString, int lowDPS, int highDPS) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.imageString = imageString;
 		this.lowDPS = lowDPS;
 		this.highDPS = highDPS;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -53,7 +63,7 @@ public class WeaponView {
 
 	@Override
 	public String toString() {
-		return "WeaponView [name=" + name + ", imageString=" + imageString + ", lowDPS=" + lowDPS + ", highDPS="
+		return "WeaponView [ id=" + id + ", name=" + name + ", imageString=" + imageString + ", lowDPS=" + lowDPS + ", highDPS="
 				+ highDPS + "]";
 	}
 }

@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -48,13 +49,18 @@ public class HibernateConfiguration {
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		
-		logger.info(environment.getRequiredProperty("jdbc.driverClassName") + " " + environment.getRequiredProperty("jdbc.url")
-		 	+ " " + environment.getRequiredProperty("jdbc.username") + " " + environment.getRequiredProperty("jdbc.password"));
+		logger.info("Found Database Properties : "
+				+ environment.getRequiredProperty("jdbc.driverClassName") + " "
+				+ environment.getRequiredProperty("jdbc.url") + " " 
+				+ environment.getRequiredProperty("jdbc.username") + " " 
+				+ environment.getRequiredProperty("jdbc.password"));
 		
 		dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));
 		dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
 		dataSource.setUsername(environment.getRequiredProperty("jdbc.username"));
 		dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));
+		
+		logger.info("We have database properties!");
 		
 		return dataSource;
 	}

@@ -45,8 +45,7 @@
 			<br> <input class="darkbtn" type="submit" value="Submit" />
 		</div>
 	</form>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+	<jsp:include page="includes/footer.jsp"></jsp:include>F
 	<script src="/ApexLegendsAnalysisTool/static/js/signup/signup.app.js"></script>
 	<script src="/ApexLegendsAnalysisTool/static/js/signup/signup.service.js"></script>
 	<script

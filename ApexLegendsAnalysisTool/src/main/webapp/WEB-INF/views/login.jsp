@@ -36,5 +36,6 @@
 				href="/ApexLegendsAnalysisTool/signup">Sign Up!</a>
 		</div>
 	</form>
+	<jsp:include page="includes/footer.jsp"></jsp:include>
 </body>
 </html>

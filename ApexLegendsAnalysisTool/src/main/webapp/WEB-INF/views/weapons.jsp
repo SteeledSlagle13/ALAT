@@ -26,7 +26,8 @@
 						<div class="selector">
 							<h3 class="white">Weapon 1</h3>
 							<select class="darkdrpdown" ng-model="weapon1"
-								ng-options="x.name.toUpperCase() for x in weapons | orderBy : 'name'"></select>
+								ng-options="x.name.toUpperCase() for x in weapons | orderBy : 'name'">
+							</select>
 							<div>
 								<br>
 							</div>
@@ -47,8 +48,8 @@
 					<td>
 						<div class="selector white">
 							<p>Name: {{weapon1.name.toUpperCase()}}</p>
-							<img height="100px" width="200px"
-								ng-src="{{weapon1.imageSource}}">
+							<img src="/ApexLegendsAnalysisTool/static/images/lmg/lmg.png"
+								height="100px" width="200px" ng-src="{{weapon1.imageSource}}">
 							<p>Damage : {{weapon1.lowDPS}}-{{weapon1.highDPS}}</p>
 							<p style="color: white;">Type :
 								{{weapon1.type.toUpperCase()}}</p>
@@ -57,8 +58,9 @@
 					<td>
 						<div class="selector white">
 							<p>Name: {{weapon2.name.toUpperCase()}}</p>
-							<img height="100px" width="200px"
-								ng-src="{{weapon2.imageSource}}">
+							<img
+								src="/ApexLegendsAnalysisTool/static/images/shotgun/shotgun.png"
+								height="100px" width="200px" ng-src="{{weapon2.imageSource}}">
 							<p>Damage : {{weapon2.lowDPS}}-{{weapon2.highDPS}}</p>
 							<p>Type : {{weapon2.type.toUpperCase()}}</p>
 						</div>
@@ -67,8 +69,9 @@
 			</table>
 		</div>
 	</div>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+	</div>
+	<jsp:include page="includes/footer.jsp"></jsp:include>F
+	<!-- Weapon Select Import -->
 	<script
 		src="/ApexLegendsAnalysisTool/static/js/weaponmanager/weaponmanager.app.js"></script>
 	<script

@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
+
 import org.springframework.stereotype.Repository;
 
-import com.apexlegendsat.springmvc.configuration.HibernateConfiguration;
 import com.apexlegendsat.springmvc.entity.UserEntity;
 
 @Repository("userDao")
@@ -19,7 +20,7 @@ public class UserDaoImpl extends AbstractDAO implements UserDAO {
 
 	@Override
 	public void deleteUserEntityById(long userId) {
-		Query deleteQuery = getSession().createSQLQuery("delete from UserEntity where id =:userId");
+		Query deleteQuery = getSession().createQuery("delete from UserEntity where id =:userId");
 		deleteQuery.setLong("userId", userId);
 
 		deleteQuery.executeUpdate();
@@ -66,7 +67,7 @@ public class UserDaoImpl extends AbstractDAO implements UserDAO {
 
 	@Override
 	public void purgeUserEntities() {
-		Query purgeQuery = getSession().createSQLQuery("delete from UserEntity");
+		Query purgeQuery = getSession().createQuery("delete from UserEntity");
 		purgeQuery.executeUpdate();
 
 	}
