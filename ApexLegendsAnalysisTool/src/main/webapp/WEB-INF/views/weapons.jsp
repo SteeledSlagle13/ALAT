@@ -50,7 +50,7 @@
 							<p>Name: {{weapon1.name.toUpperCase()}}</p>
 							<img src="/ApexLegendsAnalysisTool/static/images/lmg/lmg.png"
 								height="100px" width="200px" ng-src="{{weapon1.imageSource}}">
-							<p>Damage : {{weapon1.lowDPS}}-{{weapon1.highDPS}}</p>
+							<p>Damage : {{weapon1.lowDps}}-{{weapon1.highDps}}</p>
 							<p style="color: white;">Type :
 								{{weapon1.type.toUpperCase()}}</p>
 						</div>
@@ -61,7 +61,7 @@
 							<img
 								src="/ApexLegendsAnalysisTool/static/images/shotgun/shotgun.png"
 								height="100px" width="200px" ng-src="{{weapon2.imageSource}}">
-							<p>Damage : {{weapon2.lowDPS}}-{{weapon2.highDPS}}</p>
+							<p>Damage : {{weapon2.lowDps}}-{{weapon2.highDps}}</p>
 							<p>Type : {{weapon2.type.toUpperCase()}}</p>
 						</div>
 					</td>

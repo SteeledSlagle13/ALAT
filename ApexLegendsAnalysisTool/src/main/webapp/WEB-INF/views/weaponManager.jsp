@@ -31,12 +31,12 @@
 					</tr>
 					<tr>
 						<td><input class="input-dark" type="number"
-							ng-model="ctrl.weapon.lowDPS" name="low" placeholder="Low DPS"
+							ng-model="ctrl.weapon.lowDps" name="low" placeholder="Low DPS"
 							required /></td>
 					</tr>
 					<tr>
 						<td><input class="input-dark" type="number"
-							ng-model="ctrl.weapon.highDPS" name="high" placeholder="High DPS"
+							ng-model="ctrl.weapon.highDps" name="high" placeholder="High DPS"
 							required /></td>
 					</tr>
 					<tr>
@@ -62,10 +62,10 @@
 				<tr ng-repeat="weapon in ctrl.weapons">
 					<td align="center"><img height="100px" width="200px"
 						ng-src="{{weapon.imageSource}}"></td>
-					<td align="center"><span ng-bind="weapon.name"></span></td>
-					<td align="center"><span ng-bind="weapon.type"></span></td>
-					<td align="center"><span ng-bind="weapon.lowDPS"></span></td>
-					<td align="center"><span ng-bind="weapon.highDPS"></span></td>
+					<td align="center"><span ng-bind="weapon.name.toUpperCase()"></span></td>
+					<td align="center"><span ng-bind="weapon.type.toUpperCase()"></span></td>
+					<td align="center"><span ng-bind="weapon.lowDps"></span></td>
+					<td align="center"><span ng-bind="weapon.highDps"></span></td>
 					<td align="center">
 						<button type="button" ng-click="ctrl.edit(weapon.id)"
 							class="darkbtn">Edit</button>

@@ -1,5 +1,6 @@
 package com.apexlegendsat.springmvc.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.LogManager;
@@ -13,7 +14,7 @@ import com.apexlegendsat.springmvc.DAO.UserDAO;
 import com.apexlegendsat.springmvc.entity.UserEntity;
 import com.apexlegendsat.springmvc.view.UserView;
 
-@Service("userService")
+@Service
 @Transactional
 public class UserServiceImpl implements UserService {
 	
@@ -23,55 +24,75 @@ public class UserServiceImpl implements UserService {
 	private UserDAO userDao;
 
 	@Override
-	public void deleteUserById(long id) {
+	public void deleteUserById(int id) {
 		userDao.deleteUserEntityById(id);
 	}
 
 	@Override
-	public boolean doesUserExist(UserEntity user) {
+	public boolean doesUserExist(UserView user) {
 		return findByName(user.getUsername()) != null;
 	}
 
 	@Override
-	public List<UserEntity> findAllUsers() {
-		logger.info("in UserServiceImpl - findAllUsers()");
-		return userDao.findAllUserEntities();
+	public List<UserView> findAllUsers() {
+		List<UserEntity> userEntities = userDao.findAllUserEntities();
+		
+		List<UserView> userViews = new ArrayList<UserView>();
+		for(UserEntity userEntity : userEntities) {
+			userViews.add(convertUserEntityToUserView(userEntity));
+		}
+		
+		return userViews;
 	}
 
 	@Override
-	public UserEntity findById(long id) {
-		return userDao.findUserEntityById(id);
+	public UserView findById(int id) {
+		return convertUserEntityToUserView(userDao.findUserEntityById(id));
 	}
 
 	@Override
-	public UserEntity findByName(String name) {
-		return userDao.findUserEntityByName(name);
-	}
-	
-	@Override
-	public void purgeUsers() {
-		userDao.purgeUserEntities();
+	public UserView findByName(String name) {
+		return convertUserEntityToUserView(userDao.findUserEntityByName(name));
 	}
 
 	@Override
-	public void saveUser(UserEntity user) {
-		userDao.saveUserEntity(user);
+	public void saveUser(UserView user) {
+		userDao.saveUserEntity(convertUserViewToUserEntity(user));
 	}
 
 	@Override
-	public void updateUser(UserEntity user) {
-		userDao.updateUserEntity(user);
+	public void updateUser(UserView user) {
+		userDao.updateUserEntity(convertUserViewToUserEntity(user));
 	}
 	
 	@Override
 	public UserView convertUserEntityToUserView(UserEntity userEnt) {
+		if(userEnt == null) {
+			return null;
+		}
 		UserView userView = new UserView();
 		
 		userView.setAddress(userEnt.getAddress());
 		userView.setEmail(userEnt.getEmail());
 		userView.setUsername(userEnt.getUsername());
+		userView.setPassword(userEnt.getPassword());
 		
 		return userView;
+	}
+	
+	@Override
+	public UserEntity convertUserViewToUserEntity(UserView userView) {
+		if(userView == null) {
+			return null;
+		}
+		UserEntity userEntity = new UserEntity();
+
+		userEntity.setAddress(userView.getAddress());
+		userEntity.setEmail(userView.getEmail());
+		userEntity.setUsername(userView.getUsername());
+		userEntity.setPassword(userView.getPassword());
+		
+		return userEntity;
 	}
 
 }

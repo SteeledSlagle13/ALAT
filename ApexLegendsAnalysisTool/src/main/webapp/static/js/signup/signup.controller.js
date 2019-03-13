@@ -3,7 +3,7 @@
 angular.module('registerApp').controller('signupController', ['$scope', '$window', 'userService', function ($scope, $window, userService) {
 
     var self = this;
-    self.user = { id: null, username: '', address: '', email: '', password: '' };
+    self.user = {username: '', address: '', email: '', password: '' };
     self.users = [];
 
     self.fetchAllUsers = fetchAllUsers;
@@ -42,13 +42,12 @@ angular.module('registerApp').controller('signupController', ['$scope', '$window
             $window.alert('USERNAME_ALREADY_INUSE');
         } else {
             self.createUser(self.user);
-            $window.alert('REG_COMPLETE');
             reset();
         }
     }
 
     function reset() {
-        self.user = { id: null, username: '', address: '', email: '', password: '' };
+        self.user = {username: '', address: '', email: '', password: '' };
         $scope.regform.$setPristine();
     }
 }]);

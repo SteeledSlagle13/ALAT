@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.apexlegendsat.springmvc.entity.WeaponEntity;
 import com.apexlegendsat.springmvc.service.WeaponService;
+import com.apexlegendsat.springmvc.view.WeaponView;
 
 @RestController
 public class ALATWeaponRestController {
@@ -27,27 +27,27 @@ public class ALATWeaponRestController {
 	private WeaponService weaponService;
 
 	@RequestMapping(value = "/weapon/", method = RequestMethod.GET)
-	public ResponseEntity<List<WeaponEntity>> listAllWeapons() {
-		List<WeaponEntity> weapons = weaponService.findAllWeapons();
+	public ResponseEntity<List<WeaponView>> listAllWeapons() {
+		List<WeaponView> weapons = weaponService.findAllWeapons();
 		if (weapons.isEmpty()) {
-			return new ResponseEntity<List<WeaponEntity>>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<List<WeaponView>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<List<WeaponEntity>>(weapons, HttpStatus.OK);
+		return new ResponseEntity<List<WeaponView>>(weapons, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/weapon/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<WeaponEntity> getWeapon(@PathVariable("id") long id) {
+	public ResponseEntity<WeaponView> getWeapon(@PathVariable("id") int id) {
 		logger.info("Fetching Weapon with id " + id);
-		WeaponEntity weapon = weaponService.findById(id);
+		WeaponView weapon = weaponService.findById(id);
 		if (weapon == null) {
 			logger.error("Weapon with id " + id + " not found");
-			return new ResponseEntity<WeaponEntity>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<WeaponView>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<WeaponEntity>(weapon, HttpStatus.OK);
+		return new ResponseEntity<WeaponView>(weapon, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/weapon/", method = RequestMethod.POST)
-	public ResponseEntity<Void> createWeapon(@RequestBody WeaponEntity weapon) {
+	public ResponseEntity<Void> createWeapon(@RequestBody WeaponView weapon) {
 		logger.info("Creating Weapon " + weapon.getName());
 
 		if (weaponService.doesWeaponExist(weapon)) {
@@ -61,46 +61,38 @@ public class ALATWeaponRestController {
 	}
 
 	@RequestMapping(value = "/weapon/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<WeaponEntity> updateWeapon(@PathVariable("id") long id, @RequestBody WeaponEntity weapon) {
+	public ResponseEntity<WeaponView> updateWeapon(@PathVariable("id") int id, @RequestBody WeaponView weapon) {
 		logger.info("Updating Weapon " + id);
+		logger.info(weapon);
 
-		WeaponEntity currentWeapon = weaponService.findById(id);
+		WeaponView currentWeapon = weaponService.findById(id);
 
 		if (currentWeapon == null) {
 			logger.error("Weapon with id " + id + " not found");
-			return new ResponseEntity<WeaponEntity>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<WeaponView>(HttpStatus.NO_CONTENT);
 		}
 
 		currentWeapon.setName(weapon.getName());
 		currentWeapon.setType(weapon.getType());
 		currentWeapon.setImageSource(weapon.getImageSource());
-		currentWeapon.setLowDPS(weapon.getLowDPS());
-		currentWeapon.setHighDPS(weapon.getHighDPS());
+		currentWeapon.setLowDps(weapon.getLowDps());
+		currentWeapon.setHighDps(weapon.getHighDps());
 
 		weaponService.updateWeapon(currentWeapon);
-		return new ResponseEntity<WeaponEntity>(currentWeapon, HttpStatus.OK);
+		return new ResponseEntity<WeaponView>(currentWeapon, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/weapon/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<WeaponEntity> deleteWeapon(@PathVariable("id") long id) {
+	public ResponseEntity<WeaponView> deleteWeapon(@PathVariable("id") int id) {
 		logger.info("Fetching & Deleting Weapon with id " + id);
 
-		WeaponEntity wepaon = weaponService.findById(id);
-		if (wepaon == null) {
+		WeaponView weapon = weaponService.findById(id);
+		if (weapon == null) {
 			logger.error("Unable to delete. Weapon with id " + id + " not found");
-			return new ResponseEntity<WeaponEntity>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<WeaponView>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		weaponService.deleteWeaponById(id);
-		return new ResponseEntity<WeaponEntity>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<WeaponView>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-
-	@RequestMapping(value = "/weapon/", method = RequestMethod.DELETE)
-	public ResponseEntity<WeaponEntity> deleteAllWeapons() {
-		logger.info("Deleting All Weapons");
-
-		weaponService.purgeWeapons();
-		return new ResponseEntity<WeaponEntity>(HttpStatus.NO_CONTENT);
-	}
-
 }

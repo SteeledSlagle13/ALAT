@@ -13,15 +13,15 @@ import org.springframework.stereotype.Repository;
 
 import com.apexlegendsat.springmvc.entity.UserEntity;
 
-@Repository("userDao")
+@Repository
 public class UserDaoImpl extends AbstractDAO implements UserDAO {
 	
 	static Logger logger = LogManager.getLogger(UserDaoImpl.class.getName());
 
 	@Override
-	public void deleteUserEntityById(long userId) {
+	public void deleteUserEntityById(int userId) {
 		Query deleteQuery = getSession().createQuery("delete from UserEntity where id =:userId");
-		deleteQuery.setLong("userId", userId);
+		deleteQuery.setInteger("userId", userId);
 
 		deleteQuery.executeUpdate();
 	}
@@ -36,7 +36,7 @@ public class UserDaoImpl extends AbstractDAO implements UserDAO {
 	}
 
 	@Override
-	public UserEntity findUserEntityById(long userId) {
+	public UserEntity findUserEntityById(int userId) {
 		Criteria criteria = getSession().createCriteria(UserEntity.class);
 		criteria.add(Restrictions.eq("id", userId));
 
@@ -55,21 +55,12 @@ public class UserDaoImpl extends AbstractDAO implements UserDAO {
 		
 		List resuList = findQuery.list();
 		
-		logger.info(resuList.size());
-		
 		return (UserEntity) findQuery.uniqueResult();
 	}
 
 	@Override
 	public void saveUserEntity(UserEntity userEntity) {
 		getSession().persist(userEntity);
-	}
-
-	@Override
-	public void purgeUserEntities() {
-		Query purgeQuery = getSession().createQuery("delete from UserEntity");
-		purgeQuery.executeUpdate();
-
 	}
 
 	@Override

@@ -22,6 +22,7 @@ function userService($http) {
     }
 
     function createUser(user) {
+        console.log('create user service : ' + user.username + " " + user.password + " " + user.address + " " + user.email);
         return $http.post(REST_SERVICE_URI, user);
     }
 }

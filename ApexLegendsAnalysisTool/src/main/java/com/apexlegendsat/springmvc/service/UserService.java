@@ -7,24 +7,22 @@ import com.apexlegendsat.springmvc.view.UserView;
 
 public interface UserService {
 	
-	void purgeUsers();
+	UserEntity convertUserViewToUserEntity(UserView user);
 	
 	UserView convertUserEntityToUserView(UserEntity userEnt);
 	
-	void deleteUserById(long id);
+	void deleteUserById(int id);
 	
-	public boolean doesUserExist(UserEntity user);
+	public boolean doesUserExist(UserView user);
 
-	List<UserEntity> findAllUsers();
+	List<UserView> findAllUsers();
 	
-	UserEntity findById(long id);
+	UserView findById(int id);
 
-	UserEntity findByName(String name);
+	UserView findByName(String name);
 	
-	void saveUser(UserEntity user);
+	void saveUser(UserView user);
 
-	void updateUser(UserEntity user);
-
-	
+	void updateUser(UserView user);
 
 }

@@ -18,6 +18,7 @@ angular.module('weaponManagerApp').factory('WeaponService', ['$http', function($
     }
 
     function createWeapon(weapon) {
+        console.log(weapon.id + " " + weapon.name);
         return $http.post(REST_SERVICE_URI, weapon);
     }
 

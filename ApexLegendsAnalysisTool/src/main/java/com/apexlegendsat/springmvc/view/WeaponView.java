@@ -4,21 +4,23 @@ public class WeaponView {
 
 	private int id;
 	private String name;
-	private String imageString;
-	private int lowDPS;
-	private int highDPS;
+	private String type;
+	private String imageSource;
+	private int lowDps;
+	private int highDps;
 
 	public WeaponView() {
 
 	}
 
-	public WeaponView(int id, String name, String imageString, int lowDPS, int highDPS) {
+	public WeaponView(int id, String name, String type, String imageSource, int lowDps, int highDps) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.imageString = imageString;
-		this.lowDPS = lowDPS;
-		this.highDPS = highDPS;
+		this.type = type;
+		this.imageSource = imageSource;
+		this.lowDps = lowDps;
+		this.highDps = highDps;
 	}
 	
 	public int getId() {
@@ -37,33 +39,41 @@ public class WeaponView {
 		this.name = name;
 	}
 
-	public String getImageString() {
-		return imageString;
+	public String getType() {
+		return type;
 	}
 
-	public void setImageString(String imageString) {
-		this.imageString = imageString;
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public int getLowDPS() {
-		return lowDPS;
+	public String getImageSource() {
+		return imageSource;
 	}
 
-	public void setLowDPS(int lowDPS) {
-		this.lowDPS = lowDPS;
+	public void setImageSource(String imageSource) {
+		this.imageSource = imageSource;
 	}
 
-	public int getHighDPS() {
-		return highDPS;
+	public int getLowDps() {
+		return lowDps;
 	}
 
-	public void setHighDPS(int highDPS) {
-		this.highDPS = highDPS;
+	public void setLowDps(int lowDps) {
+		this.lowDps = lowDps;
+	}
+
+	public int getHighDps() {
+		return highDps;
+	}
+
+	public void setHighDps(int highDps) {
+		this.highDps = highDps;
 	}
 
 	@Override
 	public String toString() {
-		return "WeaponView [ id=" + id + ", name=" + name + ", imageString=" + imageString + ", lowDPS=" + lowDPS + ", highDPS="
-				+ highDPS + "]";
+		return "WeaponView [ id=" + id + ", name=" + name + ", imageSource=" + imageSource + ", lowDps=" + lowDps + ", highDps="
+				+ highDps + "]";
 	}
 }

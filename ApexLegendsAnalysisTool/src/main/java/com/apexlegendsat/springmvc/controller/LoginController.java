@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.apexlegendsat.springmvc.entity.UserEntity;
 import com.apexlegendsat.springmvc.service.UserService;
 import com.apexlegendsat.springmvc.view.UserView;
 
@@ -31,10 +30,9 @@ public class LoginController {
 	public String checkLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletRequest request) {
 		logger.info("checking user login");
 		
-		UserEntity userEnt = userService.findByName(username);
-		UserView userView = userService.convertUserEntityToUserView(userEnt);
+		UserView userView = userService.findByName(username);
 		
-		if(userEnt.getPassword().equals(password)) {
+		if(userView.getPassword().equals(password)) {
 			request.getSession().setAttribute("user", userView);
 			request.getSession().setMaxInactiveInterval(TIME_OUT_SECONDS);
 			return "redirect:/weaponmanager";

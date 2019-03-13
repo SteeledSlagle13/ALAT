@@ -14,7 +14,7 @@ public class WeaponEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
-	private long id;
+	private int id;
 	@Column(name="name")
 	private String name;
 	@Column(name="type")
@@ -22,29 +22,29 @@ public class WeaponEntity {
 	@Column(name="image_source")
 	private String imageSource;
 	@Column(name="low_dps")
-	private int lowDPS;
+	private int lowDps;
 	@Column(name="high_dps")
-	private int highDPS;
+	private int highDps;
 	
 	public WeaponEntity() {
 		id = 0;
 	}
 	
-	public WeaponEntity(long id, String name, String type, String imageSource, int lowDPS, int highDPS) {
+	public WeaponEntity(int id, String name, String type, String imageSource, int lowDps, int highDps) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.type = type;
 		this.imageSource = imageSource;
-		this.lowDPS = lowDPS;
-		this.highDPS = highDPS;
+		this.lowDps = lowDps;
+		this.highDps = highDps;
 	}
 	
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 	
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -72,67 +72,26 @@ public class WeaponEntity {
 		this.imageSource = imageSource;
 	}
 
-	public int getLowDPS() {
-		return lowDPS;
+	public int getLowDps() {
+		return lowDps;
 	}
 
-	public void setLowDPS(int lowDPS) {
-		this.lowDPS = lowDPS;
+	public void setLowDps(int lowDps) {
+		this.lowDps = lowDps;
 	}
 
-	public int getHighDPS() {
-		return highDPS;
+	public int getHighDps() {
+		return highDps;
 	}
 
-	public void setHighDPS(int highDPS) {
-		this.highDPS = highDPS;
+	public void setHighDps(int highDps) {
+		this.highDps = highDps;
 	}
 
 	@Override
 	public String toString() {
-		return "(id, name, type, low_dps, high_dps, image_source) VALUES (" + id + ", " + name + ", " + type + ", " + lowDPS + ", " + highDPS + imageSource + ")";
+		return "WeaponEntity [id=" + id + ", name=" + name + ", type=" + type + ", imageSource=" + imageSource
+				+ ", lowDps=" + lowDps + ", highDps=" + highDps + "]";
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof WeaponEntity)) {
-			return false;
-		}
-		WeaponEntity other = (WeaponEntity) obj;
-		if (highDPS != other.highDPS) {
-			return false;
-		}
-		if (imageSource == null) {
-			if (other.imageSource != null) {
-				return false;
-			}
-		} else if (!imageSource.equals(other.imageSource)) {
-			return false;
-		}
-		if (lowDPS != other.lowDPS) {
-			return false;
-		}
-		if (name == null) {
-			if (other.name != null) {
-				return false;
-			}
-		} else if (!name.equals(other.name)) {
-			return false;
-		}
-		if (type == null) {
-			if (other.type != null) {
-				return false;
-			}
-		} else if (!type.equals(other.type)) {
-			return false;
-		}
-		return true;
-	}
-
+	
 }

@@ -8,8 +8,8 @@ angular.module('weaponManagerApp').controller('WeaponController', ['$scope', 'We
         name:'',
         type:'',
         imageSource:'',
-        lowDPS:'',
-        highDPS:'',
+        lowDps:'',
+        highDps:'',
     };
     
     self.weapons=[];
@@ -34,6 +34,7 @@ angular.module('weaponManagerApp').controller('WeaponController', ['$scope', 'We
                 $scope.weapons=self.weapons;
                 $scope.weapon1 = self.weapons[0];
                 $scope.weapon2 = self.weapons[0];
+                console.log(self.weapons);
             },
             function(errResponse){
                 console.error('Error fetching weapons');

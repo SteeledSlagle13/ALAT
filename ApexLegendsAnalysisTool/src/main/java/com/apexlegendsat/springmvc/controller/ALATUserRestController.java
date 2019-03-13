@@ -1,6 +1,5 @@
 package com.apexlegendsat.springmvc.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.LogManager;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.apexlegendsat.springmvc.entity.UserEntity;
 import com.apexlegendsat.springmvc.service.UserService;
 import com.apexlegendsat.springmvc.view.UserView;
 
@@ -36,19 +34,14 @@ public class ALATUserRestController {
 	 */
 	@RequestMapping(value = "/user/", method = RequestMethod.GET)
 	public ResponseEntity<List<UserView>> listAllUsers() {
-		List<UserEntity> userEntities = userService.findAllUsers();
+		List<UserView> userViews = userService.findAllUsers();
 		
 		logger.info("should have users.");
-		if (userEntities.isEmpty()) {
-			return new ResponseEntity<List<UserView>>(HttpStatus.NO_CONTENT);
+		if (userViews.isEmpty()) {
+			return new ResponseEntity<List<UserView>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		List<UserView> viewableUsers = new ArrayList<UserView>();
-		for(UserEntity usersEnt : userEntities) {
-			viewableUsers.add(userService.convertUserEntityToUserView(usersEnt));
-		}
-		
-		return new ResponseEntity<List<UserView>>(viewableUsers, HttpStatus.OK);
+		return new ResponseEntity<List<UserView>>(userViews, HttpStatus.OK);
 	}
 
 	/**
@@ -58,17 +51,15 @@ public class ALATUserRestController {
 	 * @return user object without sensitive data or NO_CONTENT when user is not found
 	 */
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserView> getUser(@PathVariable("id") long id) {
+	public ResponseEntity<UserView> getUser(@PathVariable("id") int id) {
 
 		logger.info("Fetching user with id : " + id);
-		UserEntity userEnt = userService.findById(id);
+		UserView userView = userService.findById(id);
 
-		if (userEnt == null) {
+		if (userView == null) {
 			logger.error("user with id : " + id + " not found");
-			return new ResponseEntity<UserView>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<UserView>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
-		UserView userView = userService.convertUserEntityToUserView(userEnt);
 
 		return new ResponseEntity<UserView>(userView, HttpStatus.OK);
 	}
@@ -81,12 +72,12 @@ public class ALATUserRestController {
 	 * @return CREATED on Success | CONFLICT if username is in the Database
 	 */
 	@RequestMapping(value = "/user/", method = RequestMethod.POST)
-	public ResponseEntity<Void> createUser(@RequestBody UserEntity user) {
-		logger.info("creating user " + user.getUsername());
+	public ResponseEntity<Void> createUser(@RequestBody UserView user) {
+		logger.info("creating user " + user);
 
 		if (userService.doesUserExist(user)) {
 			logger.error("A User with name " + user.getUsername() + " already exist");
-			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		userService.saveUser(user);
@@ -101,14 +92,14 @@ public class ALATUserRestController {
 	 * @return NO_CONTENT if user cannot be found | OK if update was successful
 	 */
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<UserView> updateUser(@PathVariable("id") long id, @RequestBody UserView user) {
+	public ResponseEntity<UserView> updateUser(@PathVariable("id") int id, @RequestBody UserView user) {
 		logger.info("updating user " + id);
 
-		UserEntity currentUser = userService.findById(id);
+		UserView currentUser = userService.findById(id);
 
 		if (currentUser == null) {
 			logger.info("user with id " + id + " not found");
-			return new ResponseEntity<UserView>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<UserView>(HttpStatus.INTERNAL_SERVER_ERROR);//500
 		}
 
 		currentUser.setUsername(user.getUsername());
@@ -117,9 +108,7 @@ public class ALATUserRestController {
 
 		userService.updateUser(currentUser);
 		
-		UserView updatedUser = userService.convertUserEntityToUserView(currentUser);
-		
-		return new ResponseEntity<UserView>(updatedUser, HttpStatus.OK);
+		return new ResponseEntity<UserView>(currentUser, HttpStatus.OK);
 	}
 
 	/**
@@ -128,30 +117,17 @@ public class ALATUserRestController {
 	 * @return NO_CONTENT
 	 */
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> deleteUser(@PathVariable("id") long id) {
+	public ResponseEntity<Void> deleteUser(@PathVariable("id") int id) {
 		logger.info("Fetching & Deleting User with id " + id);
 
-		UserEntity user = userService.findById(id);
+		UserView user = userService.findById(id);
 		if (user == null) {
 			logger.error("Unable to delete. User with id " + id + " not found");
-			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		userService.deleteUserById(id);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-	}
-
-	/**
-	 * purge the users from the database
-	 * @return NO_CONTENT
-	 */
-	@RequestMapping(value = "/user/", method = RequestMethod.DELETE)
-	public ResponseEntity<UserEntity> deleteAllUsers() {
-		
-		logger.info("Deleting All Users");
-
-		userService.purgeUsers();
-		return new ResponseEntity<UserEntity>(HttpStatus.NO_CONTENT);
 	}
 	
 }

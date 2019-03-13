@@ -6,15 +6,13 @@ import com.apexlegendsat.springmvc.entity.UserEntity;
 
 public interface UserDAO {
 	
-	void deleteUserEntityById(long userId);
+	void deleteUserEntityById(int userId);
 	
 	List<UserEntity> findAllUserEntities();
 	
-	UserEntity findUserEntityById(long userId);
+	UserEntity findUserEntityById(int userId);
 	
 	UserEntity findUserEntityByName(String userName);
-	
-	void purgeUserEntities();
 	
 	void saveUserEntity(UserEntity userEntity);
 	

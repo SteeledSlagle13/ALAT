@@ -14,7 +14,7 @@ public class UserEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
-	private long id;
+	private int id;
 	@Column(name="username")
 	private String username;
 	@Column(name="address")
@@ -28,7 +28,7 @@ public class UserEntity {
 		id = 0;
 	}
 
-	public UserEntity(long id, String username, String address, String email, String password) {
+	public UserEntity(int id, String username, String address, String email, String password) {
 		this.id = id;
 		this.username = username;
 		this.address = address;
@@ -36,11 +36,11 @@ public class UserEntity {
 		this.password = password;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -74,20 +74,6 @@ public class UserEntity {
 	
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof UserEntity))
-			return false;
-		UserEntity other = (UserEntity) obj;
-		if (id != other.id)
-			return false;
-		return true;
 	}
 
 	@Override

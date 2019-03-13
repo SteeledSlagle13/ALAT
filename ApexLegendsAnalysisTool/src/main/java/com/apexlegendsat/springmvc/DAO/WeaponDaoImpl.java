@@ -14,13 +14,13 @@ import org.springframework.stereotype.Repository;
 
 import com.apexlegendsat.springmvc.entity.WeaponEntity;
 
-@Repository("weaponDao")
+@Repository
 public class WeaponDaoImpl extends AbstractDAO implements WeaponDAO {
 
 	static Logger logger = LogManager.getLogger(WeaponDaoImpl.class.getName());
 	
 	@Override
-	public void deleteWeaponEntityById(long weaponId) {
+	public void deleteWeaponEntityById(int weaponId) {
 		
 		logger.info("Attempting Weapon Delete.");
 		
@@ -37,7 +37,7 @@ public class WeaponDaoImpl extends AbstractDAO implements WeaponDAO {
 	}
 
 	@Override
-	public WeaponEntity findWeaponEntityById(long weaponId) {
+	public WeaponEntity findWeaponEntityById(int weaponId) {
 		Criteria criteria = getSession().createCriteria(WeaponEntity.class);
 		criteria.add(Restrictions.eq("id", weaponId));
 
@@ -50,12 +50,6 @@ public class WeaponDaoImpl extends AbstractDAO implements WeaponDAO {
 		findQuery.setString("weaponName", weaponName);
 
 		return (WeaponEntity) findQuery.uniqueResult();
-	}
-
-	@Override
-	public void purgeWeaponEntities() {
-		Query purgeQuery = getSession().createQuery("delete from WeaponEntity");
-		purgeQuery.executeUpdate();
 	}
 
 	@Override

@@ -6,15 +6,13 @@ import com.apexlegendsat.springmvc.entity.WeaponEntity;
 
 public interface WeaponDAO {
 
-	void deleteWeaponEntityById(long weaponId);
+	void deleteWeaponEntityById(int weaponId);
 	
 	List<WeaponEntity> findAllWeaponEntities();
 	
-	WeaponEntity findWeaponEntityById(long weaponId);
+	WeaponEntity findWeaponEntityById(int weaponId);
 	
 	WeaponEntity findWeaponEntityByName(String weaponName);
-	
-	void purgeWeaponEntities();
 	
 	void saveWeaponEntity(WeaponEntity weaponEntity);
 	
