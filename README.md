@@ -3,7 +3,7 @@
 Version : 2.0
 
 #### Purpose
-Learning Spring MVC, AngularJS.
+Learning Spring MVC.
 
 ---
 
